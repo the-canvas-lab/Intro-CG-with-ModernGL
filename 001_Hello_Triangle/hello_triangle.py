@@ -41,8 +41,17 @@ class Scene:
             ''',
         )
 
+        # A Vertex Array Object (VAO) records how vertex data is laid out in memory
+        # and which buffers feed into which shader attributes. When you call render(),
+        # the GPU replays that recorded layout automatically — you don't have to
+        # re-specify it every frame.
+        #
+        # Here we pass an empty buffer list [] because the vertex positions are
+        # hardcoded inside the vertex shader itself (the `vertices` array), so no
+        # CPU-side buffer is needed at all. We only tell the VAO how many vertices
+        # to send through the pipeline.
         self.vao = self.ctx.vertex_array(self.program, [])
-        self.vao.vertices = 3
+        self.vao.vertices = 3  # draw 3 vertices → one triangle
 
     def render(self):
         self.ctx.clear()
