@@ -4,6 +4,7 @@ in vec3 in_position;
 
 // TODO: Declare a second input attribute 'in_color' of type vec3 to receive
 //       the per-vertex color from the buffer.
+//       Refer to shaders/triangle.vert in program 004 for the pattern.
 
 // TODO: Declare an output variable 'v_color' of type vec3 to pass the color
 //       to the fragment shader.

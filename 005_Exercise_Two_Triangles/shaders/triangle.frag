@@ -4,6 +4,7 @@ layout (location = 0) out vec4 out_color;
 
 // TODO: Declare an input variable 'v_color' of type vec3 to receive the
 //       interpolated color from the vertex shader.
+//       Refer to shaders/triangle.frag in program 004 for the pattern.
 
 void main() {
     // TODO: Replace the hardcoded color with 'v_color'.

@@ -1,8 +1,8 @@
 # =============================================================================
-# Exercise 004 — Two Triangles with Per-Vertex Color
+# Exercise 005 — Two Triangles with Per-Vertex Color
 # =============================================================================
 # Goal: render two triangles side by side, each with a different solid color,
-#       using a single draw call.
+#       using a single draw call with interleaved vertex data.
 #
 # Tasks
 # -----
@@ -13,10 +13,15 @@
 #      (Tip: giving all three vertices of one triangle the same color keeps
 #       the result visually clear.)
 #
-# 2. Complete the VAO binding so the GPU knows how to split each row of the
+# 2. Before writing the VAO binding, answer these questions on paper:
+#    - How many bytes does one vertex occupy in the buffer?  (= stride)
+#    - At which byte offset within a vertex does 'in_color' start?
+#    Refer to the byte layout diagram in program 004 if needed.
+#
+# 3. Complete the VAO binding so the GPU knows how to split each row of the
 #    buffer into a position attribute and a color attribute.
 #
-# 3. Fill in the missing GLSL code in shaders/triangle.vert and
+# 4. Fill in the missing GLSL code in shaders/triangle.vert and
 #    shaders/triangle.frag (look for TODO comments there).
 #
 # Expected result: two solid-colored triangles, one on each side of the window.

@@ -19,6 +19,21 @@ python 001_Hello_Triangle/hello_triangle.py
 
 Run each lesson's script directly — no build step required. Window is 800×600, DPI-aware, with vsync.
 
+## Program List
+
+| # | Folder | Concept |
+|---|--------|---------|
+| 001 | `001_Hello_Triangle` | Inline shaders, hardcoded vertices inside the vertex shader |
+| 002 | `002_Shader_Files` | Loading shaders from separate `.vert` / `.frag` files |
+| 003 | `003_Vertex_Buffer` | Uploading vertex data from CPU to GPU via a VBO |
+| 004 | `004_Stride_Offset` | Interleaved position + color in one buffer; stride and byte offset |
+| 005 | `005_Exercise_Two_Triangles` | **Exercise**: two triangles with per-vertex color in a single buffer |
+| 006 | `006_Rectangle` | Rectangle from 6 vertices (two triangles, duplicated corners) |
+| 007 | `007_Index_Buffer` | Index buffer (IBO) to eliminate duplicate vertices |
+| 008 | `008_Multiple_Objects` | Two independent VAO/VBO pairs for separate objects |
+| 009 | `009_Multiple_Shaders` | Two shader programs to render objects in different colors |
+| 010 | `010_Exercise_Rectangle_Triangle` | **Exercise**: rectangle + triangle with separate shaders and index buffer |
+
 ## Code Conventions
 
 Each lesson follows this pattern:
@@ -26,11 +41,11 @@ Each lesson follows this pattern:
 - **Window**: created via `pygame` with `pygame.OPENGL | pygame.DOUBLEBUF` flags; `SDL_WINDOWS_DPI_AWARENESS=permonitorv2` set before init
 - **Context**: obtained via `moderngl.get_context()` (pygame creates the GL context, moderngl wraps it)
 - **Scene class**: encapsulates shader program, VAO, and per-frame `render()` logic
-- **Shaders**: written inline as GLSL strings (`#version 330 core`); loaded into `ctx.program(vertex_shader=..., fragment_shader=...)`
+- **Shaders**: from 002 onwards, loaded from separate `.vert` / `.frag` files via a `load_shader()` helper that resolves paths relative to the script
 - **Main loop**: `pygame` event loop calling `scene.render()` then `pygame.display.flip()`
 
 ## Adding a New Lesson
 
-1. Create a new folder with the next number and topic name (e.g., `002_Shaders/`)
-2. Copy the structure from the previous lesson as a starting point
-3. Keep shaders inline unless they grow large enough to warrant separate `.glsl` files
+1. Create a new folder with the next number and topic name (e.g., `011_Textures/`)
+2. Copy `load_shader()` and the pygame init block from the previous lesson as a starting point
+3. Exercises are prefixed with `exercise_` in the filename and contain `# TODO` markers for students
