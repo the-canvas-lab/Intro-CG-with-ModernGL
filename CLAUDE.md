@@ -26,13 +26,13 @@ Run each lesson's script directly — no build step required. Window is 800×600
 | 001 | `001_Hello_Triangle` | Inline shaders, hardcoded vertices inside the vertex shader |
 | 002 | `002_Shader_Files` | Loading shaders from separate `.vert` / `.frag` files |
 | 003 | `003_Vertex_Buffer` | Uploading vertex data from CPU to GPU via a VBO |
-| 004 | `004_Stride_Offset` | Interleaved position + color in one buffer; stride and byte offset |
-| 005 | `005_Exercise_Two_Triangles` | **Exercise**: two triangles with per-vertex color in a single buffer |
-| 006 | `006_Rectangle` | Rectangle from 6 vertices (two triangles, duplicated corners) |
-| 007 | `007_Index_Buffer` | Index buffer (IBO) to eliminate duplicate vertices |
-| 008 | `008_Multiple_Objects` | Two independent VAO/VBO pairs for separate objects |
-| 009 | `009_Multiple_Shaders` | Two shader programs to render objects in different colors |
-| 010 | `010_Exercise_Rectangle_Triangle` | **Exercise**: rectangle + triangle with separate shaders and index buffer |
+| 004 | `004_Exercise_Two_Triangles` | **Exercise**: two triangles side by side in a single draw call |
+| 005 | `005_Rectangle` | Rectangle from 6 vertices (two triangles, duplicated corners) |
+| 006 | `006_Index_Buffer` | Index buffer (IBO) to eliminate duplicate vertices |
+| 007 | `007_Multiple_Objects` | Two independent VAO/VBO pairs for separate objects |
+| 008 | `008_Multiple_Shaders` | Two shader programs to render objects in different colors |
+| 009 | `009_Exercise_Rectangle_Triangle` | **Exercise**: rectangle + triangle with separate shaders and index buffer |
+| 010 | `010_Stride_Offset` | Interleaved position + color in one buffer; stride and byte offset |
 
 ## Code Conventions
 
