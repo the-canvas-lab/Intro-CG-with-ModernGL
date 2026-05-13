@@ -36,7 +36,8 @@ Run each lesson's script directly — no build step required. Window is 800×600
 | 011 | `011_Exercise_Position_Color` | **Exercise**: output vertex position directly as fragment color; observe clamping of negative values |
 | 012 | `012_GLSL_Vectors` | GLSL vector types, component access (.x/.y/.z/.w), swizzling, color derived from position |
 | 013 | `013_Uniforms` | Uniforms — CPU-set values constant across a draw call; animated color via `u_time` |
-| 014 | `014_Exercise_Pulsing_Rectangle` | **Exercise**: rectangle via index buffer, red diagonal pulses via u_time, black corners stay dark |
+| 014 | `014_Exercise_Flip_Offset` | **Exercise**: flip triangle vertically and translate with animated vec2 uniform |
+| 015 | `015_Exercise_Pulsing_Rectangle` | **Exercise**: rectangle via index buffer, red diagonal pulses via u_time, black corners stay dark |
 
 ## Code Conventions
 
