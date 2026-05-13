@@ -33,8 +33,10 @@ Run each lesson's script directly — no build step required. Window is 800×600
 | 008 | `008_Multiple_Shaders` | Two shader programs to render objects in different colors |
 | 009 | `009_Exercise_Rectangle_Triangle` | **Exercise**: rectangle + triangle with separate shaders and index buffer |
 | 010 | `010_Stride_Offset` | Interleaved position + color in one buffer; stride and byte offset |
-| 011 | `011_Uniforms` | Uniforms — CPU-set values constant across a draw call; animated color via `u_time` |
-| 012 | `012_Exercise_Pulsing_Rectangle` | **Exercise**: rectangle via index buffer, red diagonal pulses via u_time, black corners stay dark |
+| 011 | `011_Exercise_Position_Color` | **Exercise**: output vertex position directly as fragment color; observe clamping of negative values |
+| 012 | `012_GLSL_Vectors` | GLSL vector types, component access (.x/.y/.z/.w), swizzling, color derived from position |
+| 013 | `013_Uniforms` | Uniforms — CPU-set values constant across a draw call; animated color via `u_time` |
+| 014 | `014_Exercise_Pulsing_Rectangle` | **Exercise**: rectangle via index buffer, red diagonal pulses via u_time, black corners stay dark |
 
 ## Code Conventions
 
