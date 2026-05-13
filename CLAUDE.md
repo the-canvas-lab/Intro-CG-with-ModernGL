@@ -33,6 +33,8 @@ Run each lesson's script directly — no build step required. Window is 800×600
 | 008 | `008_Multiple_Shaders` | Two shader programs to render objects in different colors |
 | 009 | `009_Exercise_Rectangle_Triangle` | **Exercise**: rectangle + triangle with separate shaders and index buffer |
 | 010 | `010_Stride_Offset` | Interleaved position + color in one buffer; stride and byte offset |
+| 011 | `011_Uniforms` | Uniforms — CPU-set values constant across a draw call; animated color via `u_time` |
+| 012 | `012_Exercise_Pulsing_Rectangle` | **Exercise**: rectangle via index buffer, red diagonal pulses via u_time, black corners stay dark |
 
 ## Code Conventions
 
