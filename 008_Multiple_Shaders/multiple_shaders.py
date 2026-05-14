@@ -8,6 +8,16 @@ import pygame
 os.environ['SDL_WINDOWS_DPI_AWARENESS'] = 'permonitorv2'
 
 pygame.init()
+pygame.display.gl_set_attribute(pygame.GL_CONTEXT_MAJOR_VERSION, 3)
+pygame.display.gl_set_attribute(pygame.GL_CONTEXT_MINOR_VERSION, 3)
+pygame.display.gl_set_attribute(
+    pygame.GL_CONTEXT_PROFILE_MASK,
+    pygame.GL_CONTEXT_PROFILE_CORE
+)
+pygame.display.gl_set_attribute(
+    pygame.GL_CONTEXT_FORWARD_COMPATIBLE_FLAG,
+    True
+)
 pygame.display.set_mode((800, 600), flags=pygame.OPENGL | pygame.DOUBLEBUF, vsync=True)
 
 
