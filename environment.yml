@@ -1,0 +1,12 @@
+name: CG
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - numpy
+  - pygame
+  - pip
+  - pip:
+    - moderngl
+    - pyglm
