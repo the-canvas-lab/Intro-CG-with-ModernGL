@@ -1,0 +1,88 @@
+# Introduction to Computer Graphics
+
+A step-by-step computer graphics tutorial series using **moderngl** and **pygame**, following [learnopengl.com](https://learnopengl.com) content adapted for Python.
+
+Each lesson lives in its own numbered folder and can be run independently.
+
+---
+
+## Setup
+
+### Prerequisites
+
+- [Anaconda](https://www.anaconda.com/) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
+- VS Code with the [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
+
+### Create the environment
+
+```bash
+conda env create -f environment.yml
+conda activate CG
+```
+
+### Select the interpreter in VS Code
+
+Open the Command Palette (`Ctrl+Shift+P`) → **Python: Select Interpreter** → choose the `CG` conda environment.
+
+---
+
+## Running a Lesson
+
+```bash
+python 001_Hello_Triangle/hello_triangle.py
+```
+
+Run each lesson's script directly from the project root. No build step is required. The window opens at 800×600 with vsync enabled. Close it with the window's X button.
+
+---
+
+## Lessons
+
+| # | Folder | Concept |
+|---|--------|---------|
+| 001 | `001_Hello_Triangle` | Inline shaders, hardcoded vertices inside the vertex shader |
+| 002 | `002_Shader_Files` | Loading shaders from separate `.vert` / `.frag` files |
+| 003 | `003_Vertex_Buffer` | Uploading vertex data from CPU to GPU via a VBO |
+| 004 | `004_Exercise_Two_Triangles` | **Exercise**: two triangles side by side in a single draw call |
+| 005 | `005_Rectangle` | Rectangle from 6 vertices (two triangles, duplicated corners) |
+| 006 | `006_Index_Buffer` | Index buffer (IBO) to eliminate duplicate vertices |
+| 007 | `007_Multiple_Objects` | Two independent VAO/VBO pairs for separate objects |
+| 008 | `008_Multiple_Shaders` | Two shader programs to render objects in different colors |
+| 009 | `009_Exercise_Rectangle_Triangle` | **Exercise**: rectangle + triangle with separate shaders and index buffer |
+| 010 | `010_Stride_Offset` | Interleaved position + color in one buffer; stride and byte offset |
+| 011 | `011_Exercise_Position_Color` | **Exercise**: output vertex position directly as fragment color; observe clamping of negative values |
+| 012 | `012_GLSL_Vectors` | GLSL vector types, component access (`.x/.y/.z/.w`), swizzling, color derived from position |
+| 013 | `013_Uniforms` | Uniforms — CPU-set values constant across a draw call; animated color via `u_time` |
+| 014 | `014_Exercise_Flip_Offset` | **Exercise**: flip triangle vertically and translate with animated `vec2` uniform |
+| 015 | `015_Exercise_Pulsing_Rectangle` | **Exercise**: rectangle via index buffer, red diagonal pulses via `u_time`, black corners stay dark |
+
+Exercise folders contain `# TODO` markers where you fill in the implementation.
+
+---
+
+## Project Structure
+
+```
+IntroCG/
+├── 001_Hello_Triangle/
+│   └── hello_triangle.py
+├── 002_Shader_Files/
+│   ├── shader_files.py
+│   ├── shader.vert
+│   └── shader.frag
+│   ...
+└── README.md
+```
+
+From lesson 002 onwards, each folder contains a Python script plus `.vert` and `.frag` shader files loaded at runtime.
+
+---
+
+## Code Structure
+
+Every lesson follows the same pattern:
+
+- **pygame** creates an OpenGL window (`pygame.OPENGL | pygame.DOUBLEBUF`, vsync on, DPI-aware)
+- **moderngl** wraps the existing GL context via `moderngl.get_context()`
+- A `Scene` class holds the shader program, VAO, and a `render()` method called once per frame
+- Shaders (from lesson 002 onwards) are loaded from separate files via a `load_shader()` helper
