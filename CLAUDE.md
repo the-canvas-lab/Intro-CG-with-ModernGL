@@ -49,6 +49,7 @@ Run each lesson's script directly — no build step required. Window is 800×600
 | 024 | `024_Exercise_Multiple_Model_Matrices` | **Exercise**: render 10 cubes at different positions with unique tilts; animate every third cube by chaining a time-based rotation |
 | 025 | `025_Camera` | Free-fly camera: glm.lookAt() built from camera_pos/front/up vectors; WASD movement scaled by delta_time; mouse look via Euler angles (yaw/pitch); scroll zoom via FOV |
 | 026 | `026_Exercise_Camera` | **Exercise**: (1) FPS-style movement locked to the XZ plane; (2) implement custom_look_at() manually from camera basis vectors |
+| 027 | `027_Model_Loading` | Load geometry from a .obj file via pywavefront; OBJ format (v/vt/vn/f); T2F_N3F_V3F interleaved layout; replaces hard-coded vertex arrays |
 
 ## Code Conventions
 
