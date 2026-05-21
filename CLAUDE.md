@@ -43,6 +43,10 @@ Run each lesson's script directly — no build step required. Window is 800×600
 | 018 | `018_Texture_Filtering` | One texture rendered on two side-by-side quads: left with NEAREST, right with LINEAR; UVs magnified 5× to make the difference visible |
 | 019 | `019_Exercise_Dynamic_Blend` | **Exercise**: add `u_mix` uniform to the shader and use UP/DOWN arrow keys to control the blend ratio at runtime |
 | 020 | `020_Exercise_Atlas_UV` | **Exercise**: assign UV coordinates to 6 quads to map each cell of a 3×2 texture atlas; introduces the UV Y-flip gotcha |
+| 021 | `021_Transformations` | 4×4 transformation matrices (scale, rotate, translate) via pyglm; `mat4` uniform in vertex shader; right-to-left application order |
+| 022 | `022_Exercise_Transform_Order` | **Exercise**: swap rotate/translate order to observe spinning-in-place vs orbiting; add a second quad with sin() pulsing scale |
+| 023 | `023_Coordinate_Systems` | The 5 coordinate spaces (local → world → view → clip → screen); model/view/projection matrices; depth testing; textured rotating cube |
+| 024 | `024_Exercise_Multiple_Model_Matrices` | **Exercise**: render 10 cubes at different positions with unique tilts; animate every third cube by chaining a time-based rotation |
 
 ## Code Conventions
 
