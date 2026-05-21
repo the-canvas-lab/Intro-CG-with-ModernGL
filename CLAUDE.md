@@ -39,10 +39,10 @@ Run each lesson's script directly — no build step required. Window is 800×600
 | 014 | `014_Exercise_Flip_Offset` | **Exercise**: flip triangle vertically and translate with animated vec2 uniform |
 | 015 | `015_Exercise_Pulsing_Rectangle` | **Exercise**: rectangle via index buffer, red diagonal pulses via u_time, black corners stay dark |
 | 016 | `016_Texture_Basics` | Loading an image with pygame, uploading as a ModernGL texture, UV coordinates, sampling in the fragment shader |
-| 017 | `017_Exercise_Texture_Wrapping` | **Exercise**: UVs span 0–2; toggle `WRAP_REPEAT` between `True` (GL_REPEAT) and `False` (GL_CLAMP_TO_EDGE) |
-| 018 | `018_Texture_Filtering` | NEAREST vs LINEAR filtering shown side-by-side on a magnified texture region; mipmap concepts explained in comments |
-| 019 | `019_Multiple_Textures` | Two textures bound to separate units, both sampled in the fragment shader and blended with `mix()` |
-| 020 | `020_Exercise_Dynamic_Blend` | **Exercise**: add `u_mix` uniform to the shader and use UP/DOWN arrow keys to control the blend ratio at runtime |
+| 017 | `017_Multiple_Textures` | Two textures bound to separate units, both sampled in the fragment shader and blended with `mix()` |
+| 018 | `018_Texture_Filtering` | One texture rendered on two side-by-side quads: left with NEAREST, right with LINEAR; UVs magnified 5× to make the difference visible |
+| 019 | `019_Exercise_Dynamic_Blend` | **Exercise**: add `u_mix` uniform to the shader and use UP/DOWN arrow keys to control the blend ratio at runtime |
+| 020 | `020_Exercise_Atlas_UV` | **Exercise**: assign UV coordinates to 6 quads to map each cell of a 3×2 texture atlas; introduces the UV Y-flip gotcha |
 
 ## Code Conventions
 

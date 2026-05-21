@@ -15,7 +15,7 @@ pygame.display.gl_set_attribute(
     pygame.GL_CONTEXT_PROFILE_CORE
 )
 pygame.display.gl_set_attribute(pygame.GL_CONTEXT_FORWARD_COMPATIBLE_FLAG, True)
-pygame.display.set_mode((800, 600), flags=pygame.OPENGL | pygame.DOUBLEBUF, vsync=True)
+pygame.display.set_mode((1600, 1200), flags=pygame.OPENGL | pygame.DOUBLEBUF, vsync=True)
 
 
 def load_shader(path):
@@ -31,19 +31,13 @@ def load_texture(ctx, path, filter_mode):
     data = pygame.image.tostring(image, 'RGBA')
     texture = ctx.texture(image.get_size(), 4, data)
     # filter is a (minification, magnification) pair.
-    # Minification  — texture is smaller than the screen area it covers.
-    # Magnification — texture is larger (zoomed in), which is what we see here.
-    #
     # moderngl.NEAREST: pick the single closest texel → sharp, blocky pixels
     # moderngl.LINEAR:  blend the four surrounding texels → smooth result
     #
-    # Mipmaps are pre-generated half-size copies of the texture used during
-    # minification to avoid aliasing artifacts on distant objects.
-    # build_mipmaps() generates the full mip chain on the GPU.
-    # Mipmap filter modes (e.g. LINEAR_MIPMAP_LINEAR) only apply to the
-    # minification filter — magnification never uses mipmaps.
+    # build_mipmaps() is intentionally omitted: it overrides the filter with
+    # LINEAR_MIPMAP_LINEAR internally, and mipmaps only apply to minification
+    # anyway — this demo uses magnification exclusively.
     texture.filter = (filter_mode, filter_mode)
-    texture.build_mipmaps()
     return texture
 
 
@@ -56,26 +50,25 @@ class Scene:
             fragment_shader=load_shader('shaders/rect.frag'),
         )
 
-        # UVs span only 0.0–0.2, so we're magnifying a small region of the
-        # texture (~5×) — large enough to see individual texels.
-        #
-        # Left rectangle:  NEAREST filtering — blocky, pixelated look
-        # Right rectangle: LINEAR filtering  — smooth, interpolated look
-        self.vao_nearest = self._make_rect(-0.95, -0.05, uv_max=0.2)
-        self.vao_linear  = self._make_rect( 0.05,  0.95, uv_max=0.2)
+        # Sample a 10% region centered on the texture (~10× magnification).
+        # Left rectangle:  NEAREST — blocky, pixelated look
+        # Right rectangle: LINEAR  — smooth, interpolated look
+        self.vao_nearest = self._make_rect(-0.95, -0.05, uv_size=0.1, uv_offset=0.5)
+        self.vao_linear  = self._make_rect( 0.05,  0.95, uv_size=0.1, uv_offset=0.5)
 
-        self.texture_nearest = load_texture(self.ctx, '../images/container.jpg', moderngl.NEAREST)
-        self.texture_linear  = load_texture(self.ctx, '../images/container.jpg', moderngl.LINEAR)
+        self.texture_nearest = load_texture(self.ctx, '../images/europeMap.png', moderngl.NEAREST)
+        self.texture_linear  = load_texture(self.ctx, '../images/europeMap.png', moderngl.LINEAR)
 
         self.program['u_texture'] = 0
 
-    def _make_rect(self, x_min, x_max, uv_max):
+    def _make_rect(self, x_min, x_max, uv_size, uv_offset=0.0):
+        u0, u1 = uv_offset, uv_offset + uv_size
         vertices = np.array([
-            # x       y     z     u        v
-            x_max,  0.5,  0.0,  uv_max,  uv_max,
-            x_max, -0.5,  0.0,  uv_max,  0.0,
-            x_min, -0.5,  0.0,  0.0,     0.0,
-            x_min,  0.5,  0.0,  0.0,     uv_max,
+            # x       y     z    u   v
+            x_max,  0.5,  0.0,  u1, u1,
+            x_max, -0.5,  0.0,  u1, u0,
+            x_min, -0.5,  0.0,  u0, u0,
+            x_min,  0.5,  0.0,  u0, u1,
         ], dtype='f4')
         indices = np.array([0, 1, 3, 1, 2, 3], dtype='i4')
         vbo = self.ctx.buffer(vertices)
