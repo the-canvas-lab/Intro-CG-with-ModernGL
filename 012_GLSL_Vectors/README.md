@@ -37,7 +37,7 @@ Vectors can be built from scalars, smaller vectors, or a mix:
 
 ```glsl
 vec4 color = vec4(v.rgb, 1.0);   // vec3 + float → vec4
-vec3 pos   = vec3(xy, 0.0);      // vec2 + float → vec3
+vec3 pos   = vec3(p.xy, 0.0);      // vec2 + float → vec3
 ```
 
 ## This Program

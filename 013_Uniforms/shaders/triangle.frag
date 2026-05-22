@@ -4,7 +4,7 @@ layout (location = 0) out vec4 out_color;
 
 // A uniform is a value sent from the CPU that stays constant for every
 // fragment processed in a single draw call. Unlike vertex attributes,
-// it is not read from a buffer — the CPU sets it explicitly before rendering.
+// it is not read from a buffer - the CPU sets it explicitly before rendering.
 uniform float u_time;
 
 void main() {
