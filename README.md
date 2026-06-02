@@ -60,6 +60,11 @@ Run each lesson's script directly from the project root. No build step is requir
 | 018 | `018_Texture_Filtering` | NEAREST vs LINEAR filtering shown side-by-side on a magnified texture region; mipmap concepts explained in comments |
 | 019 | `019_Multiple_Textures` | Two textures bound to separate units, both sampled in the fragment shader and blended with `mix()` |
 | 020 | `020_Exercise_Dynamic_Blend` | **Exercise**: add `u_mix` uniform to the shader and use UP/DOWN arrow keys to control the blend ratio at runtime |
+| 028 | `028_Colors` | Color as component-wise multiplication of light and object color; two-cube scene (lit object + orbiting lamp) |
+| 029 | `029_Basic_Lighting` | Phong lighting model: ambient + diffuse + specular; normal vectors in VBO; normal matrix |
+| 030 | `030_Exercise_Gouraud` | **Exercise**: move Phong calculations to the vertex shader; observe banding artifacts from per-vertex interpolation |
+| 031 | `031_Materials` | Material struct (ambient/diffuse/specular/shininess) + Light struct; real-world material presets |
+| 032 | `032_Exercise_Dynamic_Light` | **Exercise**: animate light color via `sin(time)`; update lamp cube color to match |
 
 Exercise folders contain `# TODO` markers where you fill in the implementation.
 

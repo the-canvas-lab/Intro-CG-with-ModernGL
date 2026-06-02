@@ -50,6 +50,12 @@ Run each lesson's script directly — no build step required. Window is 800×600
 | 025 | `025_Camera` | Free-fly camera: glm.lookAt() built from camera_pos/front/up vectors; WASD movement scaled by delta_time; mouse look via Euler angles (yaw/pitch); scroll zoom via FOV |
 | 026 | `026_Exercise_Camera` | **Exercise**: (1) FPS-style movement locked to the XZ plane; (2) implement custom_look_at() manually from camera basis vectors |
 | 027 | `027_Model_Loading` | Load geometry from a .obj file via pywavefront; OBJ format (v/vt/vn/f); T2F_N3F_V3F interleaved layout; replaces hard-coded vertex arrays |
+| 028 | `028_Colors` | Color as component-wise multiplication of light and object color; two-cube scene (lit object + orbiting lamp); two VAOs, two shader programs |
+| 029 | `029_Basic_Lighting` | Phong lighting model: ambient + diffuse + specular; normal vectors in VBO; normal matrix for correct shading under non-uniform scale |
+| 030 | `030_Exercise_Gouraud` | **Exercise**: split-screen Phong (left, reference) vs Gouraud (right, TODO); move Phong to vertex shader and observe interpolation banding side by side |
+| 031 | `031_Materials` | Material struct (ambient/diffuse/specular/shininess) + Light struct; real-world material presets from the devernay table |
+| 032 | `032_Material_Selector` | GLSL uniform arrays (`uniform Material materials[8]`); upload all presets at startup; switch active material at runtime via `uniform int u_material_index`; ← → keys |
+| 033 | `033_Exercise_Material_Grid` | **Exercise**: render all 8 materials as a 4×2 grid; compute grid position from index; change `u_material_index` between draw calls |
 
 ## Code Conventions
 
