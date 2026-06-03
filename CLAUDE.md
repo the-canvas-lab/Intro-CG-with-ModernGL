@@ -56,6 +56,8 @@ Run each lesson's script directly — no build step required. Window is 800×600
 | 031 | `031_Exercise_Gouraud` | **Exercise**: split-screen Phong (left, reference) vs Gouraud (right, TODO); move Phong to vertex shader and observe interpolation banding side by side |
 | 032 | `032_Materials` | Material struct (ambient/diffuse/specular/shininess) + Light struct; real-world material presets from the devernay table |
 | 033 | `033_Material_Selector` | GLSL uniform arrays (`uniform Material materials[8]`); upload all presets at startup; switch active material at runtime via `uniform int u_material_index`; ← → keys |
+| 034 | `034_Lighting_Maps` | Replace uniform material colors with textures; `sampler2D diffuse` and `sampler2D specular` in Material struct; UV coordinates added to VBO; per-fragment highlight intensity from specular map |
+| 035 | `035_Exercise_Emission_Map` | **Exercise**: add `sampler2D emission` to Material struct; sample container2_emission.png and add to final color — glow is independent of the lamp |
 
 ## Code Conventions
 
