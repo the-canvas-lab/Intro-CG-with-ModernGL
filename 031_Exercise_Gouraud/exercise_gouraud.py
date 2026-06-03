@@ -1,5 +1,5 @@
 # =============================================================================
-# Exercise 030 — Gouraud Shading (split-screen comparison)
+# Exercise 031 — Gouraud Shading (split-screen comparison)
 # =============================================================================
 # The 800×600 window is split into two equal panels:
 #
@@ -37,7 +37,7 @@ pygame.display.gl_set_attribute(
 )
 pygame.display.gl_set_attribute(pygame.GL_CONTEXT_FORWARD_COMPATIBLE_FLAG, True)
 pygame.display.set_mode((800, 600), flags=pygame.OPENGL | pygame.DOUBLEBUF, vsync=True)
-pygame.display.set_caption("030 — Left: Phong (reference)  |  Right: Gouraud (TODO)")
+pygame.display.set_caption("031 — Left: Phong (reference)  |  Right: Gouraud (TODO)")
 
 
 def load_shader(path):

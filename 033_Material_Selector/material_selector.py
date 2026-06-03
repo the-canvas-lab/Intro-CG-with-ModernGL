@@ -1,7 +1,7 @@
 # =============================================================================
-# Lesson 032 — Material Selector
+# Lesson 033 — Material Selector
 # =============================================================================
-# Extends lesson 031 by preloading an array of Material structs to the GPU
+# Extends lesson 032 by preloading an array of Material structs to the GPU
 # and selecting the active one with a single integer uniform.
 #
 # New concepts
@@ -136,7 +136,7 @@ class Scene:
         name = MATERIALS[self.material_index][0]
         n    = len(MATERIALS)
         pygame.display.set_caption(
-            f"032 — Material Selector  [{self.material_index + 1}/{n}] {name}  (← →)"
+            f"033 — Material Selector  [{self.material_index + 1}/{n}] {name}  (← →)"
         )
 
     def select_material(self, delta):

@@ -1,4 +1,4 @@
-# Exercise 030 — Gouraud Shading (split-screen)
+# Exercise 031 — Gouraud Shading (split-screen)
 
 The window is split into two equal panels showing the same scene simultaneously:
 
@@ -10,7 +10,7 @@ The window is split into two equal panels showing the same scene simultaneously:
 ## Run
 
 ```
-python 030_Exercise_Gouraud/exercise_gouraud.py
+python 031_Exercise_Gouraud/exercise_gouraud.py
 ```
 
 Before the TODOs are filled in, the right panel renders magenta (placeholder color). Implement the two shader TODOs until both panels show the lit coral cube, then compare them side by side.
@@ -55,7 +55,7 @@ Both TODOs are inside `shaders/gouraud_object.vert` and `shaders/gouraud_object.
 
 Both panels look similar, but the right panel's specular highlight shifts abruptly at face boundaries rather than fading smoothly. The artifact is most visible when the lamp is close to a face edge.
 
-The solution is in `033_Solution_Gouraud/`.
+The solution is not provided — implement it using the Phong equations from `030_Phong_Components`.
 
 ## Files
 

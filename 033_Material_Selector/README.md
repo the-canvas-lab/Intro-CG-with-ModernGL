@@ -1,11 +1,11 @@
-# Lesson 032 — Material Selector
+# Lesson 033 — Material Selector
 
-Extends lesson 031 by preloading an array of 8 material definitions to the GPU and switching between them at runtime with a single integer uniform.
+Extends lesson 032 by preloading an array of 8 material definitions to the GPU and switching between them at runtime with a single integer uniform.
 
 ## Run
 
 ```
-python 032_Material_Selector/material_selector.py
+python 033_Material_Selector/material_selector.py
 ```
 
 ## Controls

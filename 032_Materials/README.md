@@ -1,11 +1,11 @@
-# Lesson 031 — Materials
+# Lesson 032 — Materials
 
 Replaces the single object color with a **Material** struct that gives each surface independent ambient, diffuse, specular, and shininess properties.
 
 ## Run
 
 ```
-python 031_Materials/materials.py
+python 032_Materials/materials.py
 ```
 
 ## What you should see
