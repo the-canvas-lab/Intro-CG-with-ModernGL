@@ -27,7 +27,7 @@ void main() {
 
     // --- Specular ---
     // A sharp highlight visible when the reflection vector points toward the viewer.
-    // The shininess exponent (32) controls how focused the highlight is —
+    // The shininess exponent (32) controls how focused the highlight is -
     // higher values produce a smaller, shinier spot.
     float specular_strength = 0.5;
     vec3 view_dir    = normalize(u_view_pos - frag_pos);

@@ -89,9 +89,9 @@ class Scene:
     def render(self, time):
         self.ctx.clear(0.1, 0.1, 0.1)
 
-        light_pos = glm.vec3(1.0 * math.cos(time), 2.0, 1.0 * math.sin(time))
+        light_pos = glm.vec3(math.cos(time * 2.0), 2.0, 1.0 * math.sin(time * 2.0))
 
-        model = glm.rotate(glm.mat4(1.0), time * glm.radians(40.0), glm.vec3(0.5, 1.0, 0.0))
+        model         = glm.rotate(glm.mat4(1.0), glm.radians(290.0), glm.vec3(0.5, 1.0, 0.0))
         # The normal matrix corrects normals when the model matrix includes
         # non-uniform scaling.  It is the transpose of the inverse of the
         # upper-left 3×3 of the model matrix.  For pure rotation (no scaling)

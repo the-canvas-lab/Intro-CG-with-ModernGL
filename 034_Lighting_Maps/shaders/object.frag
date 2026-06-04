@@ -6,8 +6,8 @@ in vec3 frag_pos;
 in vec3 normal;
 in vec2 tex_coords;
 
-// material.diffuse  — sampler bound to unit 0 (container2.png)
-// material.specular — sampler bound to unit 1 (container2_specular.png)
+// material.diffuse  - sampler bound to unit 0 (container2.png)
+// material.specular - sampler bound to unit 1 (container2_specular.png)
 struct Material {
     sampler2D diffuse;
     sampler2D specular;
@@ -29,7 +29,7 @@ void main() {
     vec3 diff_color = vec3(texture(material.diffuse,  tex_coords));
     vec3 spec_color = vec3(texture(material.specular, tex_coords));
 
-    // Ambient uses the diffuse map — no separate ambient texture needed.
+    // Ambient uses the diffuse map - no separate ambient texture needed.
     vec3 ambient = light.ambient * diff_color;
 
     vec3 norm      = normalize(normal);
