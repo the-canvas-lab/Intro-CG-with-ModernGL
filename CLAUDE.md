@@ -58,6 +58,8 @@ Run each lesson's script directly — no build step required. Window is 800×600
 | 033 | `033_Material_Selector` | GLSL uniform arrays (`uniform Material materials[8]`); upload all presets at startup; switch active material at runtime via `uniform int u_material_index`; ← → keys |
 | 034 | `034_Lighting_Maps` | Replace uniform material colors with textures; `sampler2D diffuse` and `sampler2D specular` in Material struct; UV coordinates added to VBO; per-fragment highlight intensity from specular map |
 | 035 | `035_Exercise_Emission_Map` | **Exercise**: add `sampler2D emission` to Material struct; sample container2_emission.png and add to final color — glow is independent of the lamp |
+| 036 | `036_Light_Casters` | Directional / Point / Spot in one scene; ← → to switch; fixed light position so comparisons are isolated — same angle shows attenuation (→ Point) then cone restriction (→ Spot) |
+| 037 | `037_Exercise_Flashlight` | **Exercise**: attach spot light to camera — set `light.position = camera_pos` and `light.direction = camera_front` each frame; ambient = 0 for dramatic effect |
 
 ## Code Conventions
 

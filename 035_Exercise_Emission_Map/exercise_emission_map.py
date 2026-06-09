@@ -15,9 +15,7 @@
 #   TODO 1 — Add a sampler2D emission field to the Material struct.
 #
 #   TODO 2 — Sample the emission texture and add it to the final color.
-#             The emission contribution is independent of the lamp:
-#               vec3 emission = vec3(texture(material.emission, tex_coords));
-#               out_color = vec4(ambient + diffuse + specular + emission, 1.0);
+#             The emission contribution is independent of the lamp.
 #
 # In exercise_emission_map.py (this file):
 #
@@ -110,8 +108,6 @@ class Scene:
         self.diffuse_tex  = load_texture(self.ctx, '../images/container2.png')
         self.specular_tex = load_texture(self.ctx, '../images/container2_specular.png')
         # TODO 3 — load container2_emission.png and bind it to unit 2
-        #   self.emission_tex = load_texture(self.ctx, '../images/container2_emission.png')
-        #   self.emission_tex.use(location=2)
 
         self.diffuse_tex.use(location=0)
         self.specular_tex.use(location=1)
@@ -127,7 +123,6 @@ class Scene:
         self.object_program['material.diffuse']   = 0
         self.object_program['material.specular']  = 1
         # TODO 3 (continued) — tell the shader which unit holds the emission map
-        #   self.object_program['material.emission'] = 2
         self.object_program['material.shininess'] = 64.0
 
         self.object_program['light.ambient']  = (0.2, 0.2, 0.2)

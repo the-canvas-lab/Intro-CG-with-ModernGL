@@ -40,8 +40,6 @@ void main() {
     float spec       = pow(max(dot(view_dir, reflect_dir), 0.0), material.shininess);
     vec3 specular    = light.specular * spec * spec_color;
 
-    // TODO 2 - sample the emission map and add it to out_color.
-    //   vec3 emission = vec3(texture(material.emission, tex_coords));
-    //   out_color = vec4(ambient + diffuse + specular + emission, 1.0);
+    // TODO 2 — sample the emission map and add it to out_color
     out_color = vec4(ambient + diffuse + specular, 1.0);
 }
