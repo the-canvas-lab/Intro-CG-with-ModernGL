@@ -60,6 +60,9 @@ Run each lesson's script directly — no build step required. Window is 800×600
 | 035 | `035_Exercise_Emission_Map` | **Exercise**: add `sampler2D emission` to Material struct; sample container2_emission.png and add to final color — glow is independent of the lamp |
 | 036 | `036_Light_Casters` | Directional / Point / Spot in one scene; ← → to switch; fixed light position so comparisons are isolated — same angle shows attenuation (→ Point) then cone restriction (→ Spot) |
 | 037 | `037_Exercise_Flashlight` | **Exercise**: attach spot light to camera — set `light.position = camera_pos` and `light.direction = camera_front` each frame; ambient = 0 for dramatic effect |
+| 038 | `038_Depth_Testing` | Depth buffer non-linearity; three modes: normal / raw `gl_FragCoord.z` (nearly all white) / linearized depth; inverse perspective formula to recover view-space distance |
+| 039 | `039_Discarding_Fragments` | Alpha cutout via `discard`; grass sprites on a floor; fragments below alpha threshold are discarded — no depth write, no sorting needed; `repeat_x/y = False` to avoid edge bleed |
+| 040 | `040_Blending` | Semi-transparent windows via alpha blending; `blend_func = SRC_ALPHA, ONE_MINUS_SRC_ALPHA`; opaque wall first, then windows back-to-front; fragment shader just outputs RGBA — blend unit composites |
 
 ## Code Conventions
 
