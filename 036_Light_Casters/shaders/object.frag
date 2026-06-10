@@ -14,9 +14,9 @@ struct Material {
 
 // All three light types share one struct.
 // Fields used per mode:
-//   Directional — direction
-//   Point       — position, constant, linear, quadratic
-//   Spot        — position, direction, cut_off, outer_cut_off
+//   Directional - direction
+//   Point       - position, constant, linear, quadratic
+//   Spot        - position, direction, cut_off, outer_cut_off
 struct Light {
     vec3  direction;
     vec3  position;

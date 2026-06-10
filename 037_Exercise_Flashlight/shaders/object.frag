@@ -33,9 +33,9 @@ void main() {
     vec3 light_dir = normalize(light.position - frag_pos);
 
     // Smooth spot intensity using the angle between the fragment direction and the cone axis.
-    //   theta > cut_off        → inside inner cone  → intensity 1
-    //   theta < outer_cut_off  → outside outer cone → intensity 0
-    //   in between             → smooth gradient
+    //   theta > cut_off        -> inside inner cone  -> intensity 1
+    //   theta < outer_cut_off  -> outside outer cone -> intensity 0
+    //   in between             -> smooth gradient
     float theta     = dot(light_dir, normalize(-light.direction));
     float epsilon   = light.cut_off - light.outer_cut_off;
     float intensity = clamp((theta - light.outer_cut_off) / epsilon, 0.0, 1.0);
@@ -51,7 +51,7 @@ void main() {
     float spec       = pow(max(dot(view_dir, reflect_dir), 0.0), material.shininess);
     vec3 specular    = light.specular * spec * spec_color;
 
-    // Ambient is unchanged — fragments outside the cone still receive base light.
+    // Ambient is unchanged - fragments outside the cone still receive base light.
     diffuse  *= intensity;
     specular *= intensity;
 
