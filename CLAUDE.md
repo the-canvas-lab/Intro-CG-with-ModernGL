@@ -63,7 +63,10 @@ Run each lesson's script directly — no build step required. Window is 800×600
 | 038 | `038_Depth_Testing` | Depth buffer non-linearity; three modes: normal / raw `gl_FragCoord.z` (nearly all white) / linearized depth; inverse perspective formula to recover view-space distance |
 | 039 | `039_Discarding_Fragments` | Alpha cutout via `discard`; grass sprites on a floor; fragments below alpha threshold are discarded — no depth write, no sorting needed; `repeat_x/y = False` to avoid edge bleed |
 | 040 | `040_Blending` | Semi-transparent windows via alpha blending; `blend_func = SRC_ALPHA, ONE_MINUS_SRC_ALPHA`; opaque wall first, then windows back-to-front; fragment shader just outputs RGBA — blend unit composites |
-
+| 041 | `041_Face_Culling` | Face culling; ← → cycles no culling / cull back / cull front; `gl_FrontFacing` colours back faces blue so cull-front mode visibly exposes the interior; modes 0 and 1 look identical — that is the point |
+| 042 | `042_Framebuffers` | Two-pass rendering via FBO: scene → offscreen colour texture + depth renderbuffer → full-screen quad with post-processing; 6 effects: None / Inversion / Grayscale / Sharpen / Blur / Edge Detection |
+| 043 | `043_Exercise_Split_View` | **Exercise**: 1600×600 split window; left half shows the original FBO render (given), right half applies a grayscale effect (implement in `effect.frag` using ITU-R BT.601 luminance weights) |
+| 044 | `044_Cubemaps` | Cubemap texture; skybox (strip translation with `mat4(mat3(view))`, force depth=1 with `pos.xyww`, render last with LEQUAL); environment mapping: reflection (`reflect()`) and refraction (`refract()`, ratio 1/1.52) |
 ## Code Conventions
 
 Each lesson follows this pattern:
