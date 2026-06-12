@@ -4,6 +4,10 @@ A step-by-step computer graphics tutorial series using **moderngl** and **pygame
 
 Each lesson lives in its own numbered folder and can be run independently.
 
+| [![100,000 instanced asteroids](047-instancing.png)](047_Asteroids_Instanced) | [![Shadow mapping](051-shadow-mapping.png)](051_Shadow_Mapping) | [![Doom-style capstone](052-capstone.png)](052_Doom_Demo) |
+|:---:|:---:|:---:|
+| **047** — 100,000 asteroids,<br>one draw call | **051** — two-pass shadow mapping<br>with bias + PCF toggles | **052** — playable Doom-style<br>capstone game |
+
 ---
 
 ## Setup
