@@ -70,6 +70,7 @@ Run each lesson's script directly — no build step required. Window is 800×600
 | 045 | `045_Instancing` | Instance arrays with `/i` divisor; `vao.render(instances=N)`; 100 quads in a 10×10 grid with per-instance vec2 offset + vec3 color |
 | 046 | `046_Asteroids` | Asteroid field without instancing: 1,000 rocks × 1 draw call each = 1,001 draw calls; shows CPU draw call bottleneck; baseline for comparing with 047 |
 | 047 | `047_Asteroids_Instanced` | Asteroid field with instancing: 100,000 rocks in 1 draw call; per-instance mat4 split into 4 × vec4; separate planet shader (uniform model) vs asteroid shader (instanced); free-fly camera; matches learnopengl.com 10.3 |
+| 048 | `048_Doom_Demo` | **Capstone**: playable Doom-style FPS combining ~15 earlier lessons — text-grid maze baked to world-space VBOs, flashlight spot light, billboard sprite enemies with alpha cutout, hit-scan shooting, blended HUD; sprite art drawn procedurally with pygame |
 ## Code Conventions
 
 Each lesson follows this pattern:
