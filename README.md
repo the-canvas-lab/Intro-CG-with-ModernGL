@@ -77,8 +77,25 @@ Run each lesson's script directly from the project root. No build step is requir
 | 035 | `035_Exercise_Emission_Map` | **Exercise**: add `sampler2D emission` to Material struct; sample `container2_emission.png` and add to final color — glow is independent of the lamp |
 | 036 | `036_Light_Casters` | Directional / Point / Spot in one scene; ← → to switch; fixed light position so comparisons are isolated — same angle shows attenuation (→ Point) then cone restriction (→ Spot) |
 | 037 | `037_Exercise_Flashlight` | **Exercise**: attach spot light to camera — set `light.position = camera_pos` and `light.direction = camera_front` each frame; ambient = 0 for dramatic effect |
+| 038 | `038_Depth_Testing` | Depth buffer non-linearity; three modes: normal / raw `gl_FragCoord.z` (nearly all white) / linearized depth; inverse perspective formula to recover view-space distance |
+| 039 | `039_Discarding_Fragments` | Alpha cutout via `discard`; grass sprites on a floor; fragments below alpha threshold are discarded — no depth write, no sorting needed; `repeat_x/y = False` to avoid edge bleed |
+| 040 | `040_Blending` | Semi-transparent windows via alpha blending; `blend_func = SRC_ALPHA, ONE_MINUS_SRC_ALPHA`; opaque wall first, then windows back-to-front; fragment shader just outputs RGBA — blend unit composites |
+| 041 | `041_Face_Culling` | Face culling shown on an open box (front wall missing, hand-wound CCW); ← → cycles: no culling (tinted interior visible) / cull back (see straight through the opening — the classic see-through-walls game artifact) / cull front (inside out); `gl_FrontFacing` + per-face IDs colour the interior walls |
+| 042 | `042_Framebuffers` | Two-pass rendering via FBO: scene → offscreen colour texture + depth renderbuffer → full-screen quad with post-processing; 6 effects: None / Inversion / Grayscale / Sharpen / Blur / Edge Detection |
+| 043 | `043_Exercise_Split_View` | **Exercise**: 1600×600 split window; left half shows the original FBO render (given), right half applies a grayscale effect (implement in `effect.frag` using ITU-R BT.601 luminance weights) |
+| 044 | `044_Cubemaps` | Cubemap texture; skybox (strip translation with `mat4(mat3(view))`, force depth=1 with `pos.xyww`, render last with LEQUAL); environment mapping: reflection (`reflect()`) and refraction (`refract()`, ratio 1/1.52) |
+| 045 | `045_Instancing` | Instance arrays with `/i` divisor; `vao.render(instances=N)`; 100 quads in a 10×10 grid with per-instance vec2 offset + vec3 color |
+| 046 | `046_Asteroids` | Asteroid field without instancing: 1,000 rocks × 1 draw call each = 1,001 draw calls; shows CPU draw call bottleneck; baseline for comparing with 047 |
+| 047 | `047_Asteroids_Instanced` | Asteroid field with instancing: 100,000 rocks in 1 draw call; per-instance mat4 split into 4 × vec4; separate planet shader (uniform model) vs asteroid shader (instanced); free-fly camera |
+| 048 | `048_Uniform_Buffer_Objects` | Uniform blocks + UBOs: one buffer shared by multiple programs via binding points; std140 layout and the vec3-padding gotcha; per-frame camera/light written once for all shaders (the OpenGL twin of Vulkan's descriptor-set uniform buffers) |
+| 049 | `049_Gamma_Correction` | Monitors apply a ~2.2 power curve: decode sRGB textures to linear, light in linear space (1/d² attenuation finally looks right), encode once at the end; Space toggles correction; linear gradient strip shows the perceptual midpoint shift |
+| 050 | `050_Mipmaps` | Minification aliasing and the mip chain; ← → cycles LINEAR (shimmer) / LINEAR_MIPMAP_NEAREST (bands) / trilinear (smooth) / debug mode with each mip level dyed a different color via `texture.write(level=n)` |
+| 051 | `051_Shadow_Mapping` | Two-pass shadows: depth-only FBO from the light's view (ortho × lookAt), depth comparison in light space in pass 2; B toggles bias (shadow acne), P toggles 3×3 PCF; raw shadow map shown in a corner overlay |
+| 052 | `052_Doom_Demo` | **Capstone**: playable Doom-style FPS combining ~15 earlier lessons — text-grid maze baked to world-space VBOs, flashlight spot light, billboard sprite enemies with alpha cutout, hit-scan shooting, blended HUD; sprite art drawn procedurally with pygame |
 
 Exercise folders contain `# TODO` markers where you fill in the implementation.
+
+Lessons 048–051 bridge toward a follow-up Vulkan course (uniform buffers, sRGB, mip chains, multi-pass rendering — concepts Vulkan makes explicit), and lesson 052 closes the series with a playable game built entirely from techniques covered along the way.
 
 ---
 
