@@ -1,31 +1,45 @@
 # =============================================================================
 # Lesson 041 — Face Culling
 # =============================================================================
-# Every triangle has a front face and a back face, determined by the order in
-# which its vertices wind around when viewed from the camera:
+# Every triangle has a front and a back, decided by the order its vertices
+# wind on screen:
 #
 #   Counter-clockwise (CCW) → front face   (OpenGL default)
 #   Clockwise (CW)          → back face
 #
-# cube.obj stores its exterior faces with CW winding, so we tell OpenGL to
-# treat CW as the front face:
+# For a closed object the camera can only ever see front faces — every back
+# face is hidden behind the object itself. Telling the GPU to discard them
+# early ("cull" them) skips rasterising roughly half of all triangles for
+# free, which is why every real game has back-face culling enabled.
 #
-#   ctx.front_face = 'cw'
-#
-# Without this the exterior faces would be mislabelled as back faces, culled
-# in the wrong mode, and coloured blue by the shader.
+# To make each mode VISIBLE, this box is missing its front wall, so the
+# camera can see inside as it spins. The fragment shader detects back faces
+# with gl_FrontFacing and colours each interior wall a slightly different
+# blue (via a per-face ID vertex attribute) — the inside reads as a room
+# with five distinguishable walls.
 #
 # Modes (← →):
 #
-#   0 — No culling       All triangles sent to the rasteriser.
-#   1 — Cull back        Back-facing (interior) triangles discarded early.
-#   2 — Cull front       Front-facing (exterior) triangles discarded — the
-#                        near faces disappear, exposing the blue interior.
+#   1 — No culling     Through the opening you see the blue interior walls.
 #
-# Modes 0 and 1 look identical: for a solid convex mesh the depth test already
-# prevents back faces from reaching the colour buffer, so culling them is a
-# pure performance win with no visual change.  The gl_FrontFacing colouring in
-# the fragment shader (blue for back faces) makes mode 2 immediately obvious.
+#   2 — Cull back      The blue interior is GONE: when the opening points at
+#                      you, you look straight through to the background.
+#                      This is the classic "see-through walls" artifact when
+#                      a game camera clips inside geometry — the walls are
+#                      still there, you are just seeing their culled side.
+#
+#   3 — Cull front     The exact opposite: the textured exterior vanishes
+#                      and only the blue interior is drawn — the box appears
+#                      turned inside out.
+#
+# Remember: on a CLOSED mesh, modes 1 and 2 would look identical, because
+# the depth test already hides back faces — culling them merely saves the
+# work. Only an open (or camera-penetrated) mesh reveals the difference.
+#
+# The vertices below are wound CCW as seen from OUTSIDE the box, matching
+# the OpenGL default. Winding mistakes are the #1 cause of "my model has
+# holes when culling is on" — flip two vertices of a triangle below and
+# watch that wall vanish in mode 2.
 #
 # Controls:  ← / → — switch mode   Esc — quit
 # =============================================================================
@@ -37,7 +51,6 @@ import glm
 import moderngl
 import numpy as np
 import pygame
-import pywavefront
 
 os.environ['SDL_WINDOWS_DPI_AWARENESS'] = 'permonitorv2'
 
@@ -68,44 +81,80 @@ def load_texture(ctx, path):
     return tex
 
 
-def load_obj_mesh(path):
-    base = os.path.dirname(os.path.abspath(__file__))
-    scene = pywavefront.Wavefront(
-        os.path.join(base, path), create_materials=True, parse=True,
-    )
-    all_verts = []
-    for mat in scene.materials.values():
-        if mat.vertices:
-            all_verts.extend(mat.vertices)
-    verts = np.array(all_verts, dtype='f4').reshape(-1, 8)
-    return np.ascontiguousarray(np.hstack([verts[:, 5:], verts[:, 2:5], verts[:, 0:2]]))
+# An OPEN box: 5 faces, each wound CCW when viewed from outside.
+# The front face (z = +0.5) is deliberately missing — that is the opening.
+#
+# The last attribute is a per-face ID (0–4). The fragment shader uses it to
+# give each INTERIOR wall a slightly different tint, so the inside reads as
+# a room with distinguishable walls instead of one flat colour.
+# Layout: pos(3f) uv(2f) face_id(1f)
+BOX_VERTS = np.array([
+    # back face (z = -0.5)                    id
+    -0.5, -0.5, -0.5,  0.0, 0.0,  0,
+     0.5,  0.5, -0.5,  1.0, 1.0,  0,
+     0.5, -0.5, -0.5,  1.0, 0.0,  0,
+     0.5,  0.5, -0.5,  1.0, 1.0,  0,
+    -0.5, -0.5, -0.5,  0.0, 0.0,  0,
+    -0.5,  0.5, -0.5,  0.0, 1.0,  0,
+    # left face (x = -0.5)
+    -0.5,  0.5,  0.5,  1.0, 0.0,  1,
+    -0.5,  0.5, -0.5,  1.0, 1.0,  1,
+    -0.5, -0.5, -0.5,  0.0, 1.0,  1,
+    -0.5, -0.5, -0.5,  0.0, 1.0,  1,
+    -0.5, -0.5,  0.5,  0.0, 0.0,  1,
+    -0.5,  0.5,  0.5,  1.0, 0.0,  1,
+    # right face (x = +0.5)
+     0.5,  0.5,  0.5,  1.0, 0.0,  2,
+     0.5, -0.5, -0.5,  0.0, 1.0,  2,
+     0.5,  0.5, -0.5,  1.0, 1.0,  2,
+     0.5, -0.5, -0.5,  0.0, 1.0,  2,
+     0.5,  0.5,  0.5,  1.0, 0.0,  2,
+     0.5, -0.5,  0.5,  0.0, 0.0,  2,
+    # bottom face (y = -0.5)
+    -0.5, -0.5, -0.5,  0.0, 1.0,  3,
+     0.5, -0.5, -0.5,  1.0, 1.0,  3,
+     0.5, -0.5,  0.5,  1.0, 0.0,  3,
+     0.5, -0.5,  0.5,  1.0, 0.0,  3,
+    -0.5, -0.5,  0.5,  0.0, 0.0,  3,
+    -0.5, -0.5, -0.5,  0.0, 1.0,  3,
+    # top face (y = +0.5)
+    -0.5,  0.5, -0.5,  0.0, 1.0,  4,
+     0.5,  0.5,  0.5,  1.0, 0.0,  4,
+     0.5,  0.5, -0.5,  1.0, 1.0,  4,
+     0.5,  0.5,  0.5,  1.0, 0.0,  4,
+    -0.5,  0.5, -0.5,  0.0, 1.0,  4,
+    -0.5,  0.5,  0.5,  0.0, 0.0,  4,
+], dtype='f4')
 
 
-MODES = ["No culling", "Cull back (default)", "Cull front"]
+MODES = ["No culling — blue interior visible",
+         "Cull back — see straight through the opening",
+         "Cull front — inside out"]
 
 
 class Scene:
     def __init__(self):
         self.ctx = moderngl.get_context()
         self.ctx.enable(moderngl.DEPTH_TEST)
-        self.ctx.front_face = 'cw'  # cube.obj uses CW winding for exterior faces
+        # CCW = front is already the default; stated explicitly because the
+        # winding convention is the entire subject of this lesson.
+        self.ctx.front_face = 'ccw'
 
         self.program = self.ctx.program(
             vertex_shader=load_shader('shaders/object.vert'),
             fragment_shader=load_shader('shaders/object.frag'),
         )
 
-        # Only position and UV are needed — skip the normal data (12 bytes).
-        vbo = self.ctx.buffer(load_obj_mesh('../models/cube.obj'))
+        vbo = self.ctx.buffer(BOX_VERTS)
         self.vao = self.ctx.vertex_array(
             self.program,
-            [(vbo, '3f 12x 2f', 'in_position', 'in_uv')],
+            [(vbo, '3f 2f 1f', 'in_position', 'in_uv', 'in_face_id')],
         )
 
         load_texture(self.ctx, '../images/container2.png').use(location=0)
         self.program['u_texture'] = 0
 
-        camera_pos = glm.vec3(0.0, 1.5, 4.0)
+        camera_pos = glm.vec3(0.0, 0.9, 2.6)
         view       = glm.lookAt(camera_pos, glm.vec3(0.0), glm.vec3(0.0, 1.0, 0.0))
         projection = glm.perspective(glm.radians(45.0), 800.0 / 600.0, 0.1, 100.0)
         self.program['view'].write(view)
@@ -136,7 +185,8 @@ class Scene:
 
     def render(self, time):
         self.ctx.clear(0.1, 0.1, 0.1)
-        model = glm.rotate(glm.mat4(1.0), glm.radians(time * 30.0), glm.vec3(0.5, 1.0, 0.3))
+        # Spin about Y so the opening sweeps past the camera once per turn.
+        model = glm.rotate(glm.mat4(1.0), glm.radians(time * 40.0), glm.vec3(0.0, 1.0, 0.0))
         self.program['model'].write(model)
         self.vao.render()
 

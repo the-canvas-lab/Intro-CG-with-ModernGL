@@ -1,9 +1,9 @@
-# Lesson 048 — Doom Demo (capstone)
+# Lesson 052 — Doom Demo (capstone)
 
 ## Run
 
 ```
-python 048_Doom_Demo/doom_demo.py
+python 052_Doom_Demo/doom_demo.py
 ```
 
 ## Controls

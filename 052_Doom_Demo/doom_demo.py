@@ -1,5 +1,5 @@
 # =============================================================================
-# Lesson 048 — Doom Demo (capstone)
+# Lesson 052 — Doom Demo (capstone)
 # =============================================================================
 # A tiny first-person shooter in the spirit of Doom (1993), assembled almost
 # entirely from techniques covered in earlier lessons:
@@ -46,7 +46,7 @@ pygame.display.gl_set_attribute(
 )
 pygame.display.gl_set_attribute(pygame.GL_CONTEXT_FORWARD_COMPATIBLE_FLAG, True)
 pygame.display.set_mode((800, 600), flags=pygame.OPENGL | pygame.DOUBLEBUF, vsync=True)
-pygame.display.set_caption("048 — Doom Demo")
+pygame.display.set_caption("052 — Doom Demo")
 
 
 def load_shader(path):
