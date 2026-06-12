@@ -67,6 +67,9 @@ Run each lesson's script directly — no build step required. Window is 800×600
 | 042 | `042_Framebuffers` | Two-pass rendering via FBO: scene → offscreen colour texture + depth renderbuffer → full-screen quad with post-processing; 6 effects: None / Inversion / Grayscale / Sharpen / Blur / Edge Detection |
 | 043 | `043_Exercise_Split_View` | **Exercise**: 1600×600 split window; left half shows the original FBO render (given), right half applies a grayscale effect (implement in `effect.frag` using ITU-R BT.601 luminance weights) |
 | 044 | `044_Cubemaps` | Cubemap texture; skybox (strip translation with `mat4(mat3(view))`, force depth=1 with `pos.xyww`, render last with LEQUAL); environment mapping: reflection (`reflect()`) and refraction (`refract()`, ratio 1/1.52) |
+| 045 | `045_Instancing` | Instance arrays with `/i` divisor; `vao.render(instances=N)`; 100 quads in a 10×10 grid with per-instance vec2 offset + vec3 color |
+| 046 | `046_Asteroids` | Asteroid field without instancing: 1,000 rocks × 1 draw call each = 1,001 draw calls; shows CPU draw call bottleneck; baseline for comparing with 047 |
+| 047 | `047_Asteroids_Instanced` | Asteroid field with instancing: 100,000 rocks in 1 draw call; per-instance mat4 split into 4 × vec4; separate planet shader (uniform model) vs asteroid shader (instanced); free-fly camera; matches learnopengl.com 10.3 |
 ## Code Conventions
 
 Each lesson follows this pattern:
