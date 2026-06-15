@@ -10,7 +10,7 @@ in vec3 normal;
 // updates the lighting of every object, no matter which program draws it.
 //
 // std140 gotcha: vec3 is aligned to 16 bytes, so light_color does NOT start
-// at byte 12 — it starts at byte 16. The CPU must write the padding.
+// at byte 12 - it starts at byte 16. The CPU must write the padding.
 //
 //   vec3 light_dir    -> bytes  0..11   (+ 4 padding bytes)
 //   vec3 light_color  -> bytes 16..27   (+ 4 padding bytes)

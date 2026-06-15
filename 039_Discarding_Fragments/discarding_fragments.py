@@ -44,7 +44,7 @@ pygame.display.set_caption("039 — Discarding Fragments")
 
 def load_shader(path):
     base = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(base, path)) as f:
+    with open(os.path.join(base, path), encoding='utf-8') as f:
         return f.read()
 
 
@@ -58,15 +58,14 @@ def load_texture(ctx, path):
     return tex
 
 
-# Large floor quad in the XZ plane.  Dummy UVs are included so it can share
-# the same vertex shader as the grass quads.
+# Large floor quad in the XZ plane.
 FLOOR_VERTS = np.array([
-    -10, 0, -10,  0, 0,
-     10, 0, -10,  1, 0,
-     10, 0,  10,  1, 1,
-    -10, 0, -10,  0, 0,
-     10, 0,  10,  1, 1,
-    -10, 0,  10,  0, 1,
+    -10, 0, -10,
+     10, 0, -10,
+     10, 0,  10,
+    -10, 0, -10,
+     10, 0,  10,
+    -10, 0,  10,
 ], dtype='f4')
 
 # Unit grass quad: 1 wide, 1 tall, base at y = 0, facing +z.
@@ -112,7 +111,7 @@ class Scene:
         floor_vbo = self.ctx.buffer(FLOOR_VERTS)
         self.floor_vao = self.ctx.vertex_array(
             self.floor_program,
-            [(floor_vbo, '3f 2f', 'in_position', 'in_uv')],
+            [(floor_vbo, '3f', 'in_position')],
         )
 
         grass_vbo = self.ctx.buffer(GRASS_VERTS)

@@ -60,7 +60,7 @@ QUAD_VERTS = np.array([
 
 def load_shader(path):
     base = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(base, path)) as f:
+    with open(os.path.join(base, path), encoding='utf-8') as f:
         return f.read()
 
 

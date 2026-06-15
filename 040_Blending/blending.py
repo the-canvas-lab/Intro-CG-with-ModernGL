@@ -53,7 +53,7 @@ pygame.display.set_caption("040 — Blending")
 
 def load_shader(path):
     base = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(base, path)) as f:
+    with open(os.path.join(base, path), encoding='utf-8') as f:
         return f.read()
 
 

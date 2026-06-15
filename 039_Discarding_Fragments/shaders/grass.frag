@@ -11,7 +11,7 @@ void main() {
 
     // Throw away fragments whose alpha falls below the threshold.
     // The depth buffer is not written for discarded fragments, so
-    // no depth sorting is needed — unlike true alpha blending.
+    // no depth sorting is needed - unlike true alpha blending.
     if (tex_color.a < 0.1)
         discard;
 

@@ -13,7 +13,7 @@ layout (std140) uniform Matrices {
     mat4 projection;
 };
 
-// Per-object data stays a plain uniform — only data SHARED by many programs
+// Per-object data stays a plain uniform - only data SHARED by many programs
 // belongs in a UBO.
 uniform mat4 model;
 

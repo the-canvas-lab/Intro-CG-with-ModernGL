@@ -30,13 +30,13 @@ float shadow_factor(vec3 n, vec3 l) {
 
     // Shadow ACNE: the map's resolution is finite, so a surface sampled at
     // a slight angle zig-zags above and below its own recorded depth and
-    // shadows itself in stripes. A small depth bias — larger at grazing
-    // angles — pushes the comparison past the noise. (Toggle B to see it.)
+    // shadows itself in stripes. A small depth bias - larger at grazing
+    // angles - pushes the comparison past the noise. (Toggle B to see it.)
     float bias = u_use_bias ? max(0.05 * (1.0 - dot(n, l)), 0.005) : 0.0;
 
     if (u_use_pcf) {
         // PCF (percentage-closer filtering): average the comparison over a
-        // 3x3 neighbourhood. Note it averages COMPARISONS, not depths —
+        // 3x3 neighbourhood. Note it averages COMPARISONS, not depths -
         // averaging depths first would be meaningless. (Toggle P.)
         vec2 texel = 1.0 / vec2(textureSize(u_shadow_map, 0));
         float shadow = 0.0;
@@ -61,7 +61,7 @@ void main() {
     float diff   = max(dot(n, l), 0.0);
     float shadow = shadow_factor(n, l);
 
-    // Ambient stays — shadowed areas are darker, not black.
+    // Ambient stays - shadowed areas are darker, not black.
     vec3 color = (0.25 + (1.0 - shadow) * diff) * vec3(1.0, 0.96, 0.88) * tex;
     out_color = vec4(color, 1.0);
 }

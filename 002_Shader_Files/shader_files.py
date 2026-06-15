@@ -24,7 +24,7 @@ def load_shader(path):
     # Resolve the path relative to this script's directory so the program can
     # be launched from any working directory.
     base = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(base, path)) as f:
+    with open(os.path.join(base, path), encoding='utf-8') as f:
         return f.read()
 
 

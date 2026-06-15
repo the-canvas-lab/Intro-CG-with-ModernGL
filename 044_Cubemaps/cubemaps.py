@@ -51,7 +51,7 @@ pygame.display.set_mode((800, 600), flags=pygame.OPENGL | pygame.DOUBLEBUF, vsyn
 
 def load_shader(path):
     base = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(base, path)) as f:
+    with open(os.path.join(base, path), encoding='utf-8') as f:
         return f.read()
 
 
@@ -189,7 +189,7 @@ class Scene:
 
         # --- scene cube ---
         angle = glm.radians(time * 30.0)
-        model = glm.rotate(glm.mat4(1.0), angle, glm.vec3(0.5, 1.0, 0.3))
+        model = glm.rotate(glm.mat4(1.0), angle, glm.vec3(0.0, 1.0, 0.0))
         self.scene_prog['model'].write(model)
         self.scene_prog['normal_matrix'].write(
             glm.mat3(glm.transpose(glm.inverse(model)))

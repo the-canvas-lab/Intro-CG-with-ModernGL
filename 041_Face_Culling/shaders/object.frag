@@ -8,7 +8,7 @@ in float face_id;
 uniform sampler2D u_texture;
 
 // One blue tint per wall (indexed by the face_id vertex attribute), shaded
-// like rough ambient occlusion — top brightest, bottom darkest — so the
+// like rough ambient occlusion - top brightest, bottom darkest - so the
 // interior reads as a room with five distinguishable walls.
 const vec3 INTERIOR_TINTS[5] = vec3[5](
     vec3(0.30, 0.50, 1.00),   // 0 back
@@ -21,7 +21,7 @@ const vec3 INTERIOR_TINTS[5] = vec3[5](
 void main() {
     // gl_FrontFacing is true when the fragment belongs to a front-facing
     // triangle (one whose vertices wind counter-clockwise as seen from the
-    // camera). Back-facing fragments — the box interior — are coloured so
+    // camera). Back-facing fragments - the box interior - are coloured so
     // their presence or absence is obvious when switching cull modes.
     if (gl_FrontFacing) {
         out_color = texture(u_texture, tex_coords);
