@@ -7,12 +7,12 @@ in vec2 tex_coords;
 uniform sampler2D u_screen;
 uniform int u_mode;
 
-const float OFFSET = 1.0 / 300.0;
+const vec2 OFFSET = vec2(1.0 / 800.0, 1.0 / 600.0);
 
 vec2 offsets[9] = vec2[](
-    vec2(-OFFSET,  OFFSET), vec2(0.0,  OFFSET), vec2(OFFSET,  OFFSET),
-    vec2(-OFFSET,  0.0   ), vec2(0.0,  0.0   ), vec2(OFFSET,  0.0   ),
-    vec2(-OFFSET, -OFFSET), vec2(0.0, -OFFSET), vec2(OFFSET, -OFFSET)
+    vec2(-OFFSET.x,  OFFSET.y), vec2(0.0,  OFFSET.y), vec2(OFFSET.x,  OFFSET.y),
+    vec2(-OFFSET.x,  0.0     ), vec2(0.0,  0.0      ), vec2(OFFSET.x,  0.0     ),
+    vec2(-OFFSET.x, -OFFSET.y), vec2(0.0, -OFFSET.y), vec2(OFFSET.x, -OFFSET.y)
 );
 
 vec3 sample_kernel(float kernel[9]) {
