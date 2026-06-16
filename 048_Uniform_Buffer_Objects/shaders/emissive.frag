@@ -13,8 +13,5 @@ layout (std140) uniform LightBlock {
 };
 
 void main() {
-    float diff = max(dot(normalize(normal), -normalize(light_dir)), 0.0);
-    diff = floor(diff * 4.0) / 4.0;        // toon-style banding
-    vec3 base = vec3(0.30, 0.50, 0.90);    // cool porcelain
-    out_color = vec4((0.25 + diff) * light_color * base, 1.0);
+    out_color = vec4(light_color, 1.0);
 }

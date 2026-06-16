@@ -75,8 +75,9 @@ garbage, with no error anywhere.
 
 ## This Lesson
 
-Four spinning cubes alternate between two programs — warm diffuse and cool
-toon shading. Both programs share:
+Four spinning cubes alternate between two programs — diffuse shading
+(Phong diffuse, surface normal used) and emissive shading (outputs the
+light color directly, surface normal ignored). Both programs share:
 
 - `Matrices` (binding 0): view written once per frame, projection once ever
 - `LightBlock` (binding 1): an animated light color whose single buffer
