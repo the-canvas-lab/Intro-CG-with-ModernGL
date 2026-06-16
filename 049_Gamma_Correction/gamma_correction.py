@@ -20,8 +20,10 @@
 # Press SPACE to toggle correction. Watch two things:
 #   * the light pools: corrected, the inverse-square falloff looks natural;
 #     uncorrected, the same physics looks implausibly dark and harsh
-#   * the gradient strip on top: a linear ramp only LOOKS linear when
-#     gamma-corrected
+#   * the gradient strip on top: a linear ramp LOOKS perceptually uniform when
+#     gamma is OFF — the monitor's 2.2 curve and your eye's response cancel out.
+#     With gamma ON the light output is physically linear (equal photons per
+#     step), but it looks dark-biased because your eye has a power-law response.
 #
 # In real engines the encode step is free: render into an SRGB framebuffer
 # (or, in Vulkan, pick a *_SRGB swapchain format — one of the first choices
